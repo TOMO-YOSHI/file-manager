@@ -1,0 +1,26 @@
+.tileListDiv {
+    padding: 1.25rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.25rem;
+    overflow-y: scroll;
+
+    // Small devices (landscape phones, 576px and up)
+    // @media screen and (min-width: 576px) { ... }
+
+    // Medium devices (tablets, 768px and up)
+    @media screen and (min-width: 768px) { 
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+    }
+
+    // Large devices (desktops, 992px and up)
+    @media screen and (min-width: 992px) {
+        // grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+    }
+
+    // Extra large devices (large desktops, 1200px and up)
+    @media screen and (min-width: 1200px) {
+        grid-template-columns: repeat(4, minmax(200px, 1fr));
+    }
+}

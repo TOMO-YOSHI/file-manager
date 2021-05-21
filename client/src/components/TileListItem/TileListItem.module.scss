@@ -1,0 +1,55 @@
+@import '../../style/variables.scss';
+@import '../../style/extends.scss';
+
+.cardItemDiv {
+    @extend %cardShadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .75rem;
+    cursor: pointer;
+}
+
+.cardItemDiv:hover {
+  @extend %hoverShadow;
+}
+
+.fileImageDiv {
+    flex-grow: 10;
+    // position: relative;
+}
+
+.fileImage {
+    display: block;
+    // position: absolute;
+    // top: 50%;
+    // transform: translate(0, -50%);
+    height: 100% !important;
+    width: 100%;
+    object-fit: contain;
+}
+
+.captionDiv {
+    display: flex;
+    align-items: center;
+    // padding: .5rem;
+    font-size: 14px;
+    justify-self: flex-end;
+    margin-top: .5rem;
+}
+
+.fileType {
+    margin: 0;
+    width: fit-content;
+    background-color: $secondary-color;
+    color: $theme-white;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.caption {
+    margin: 0 1rem;
+    width: calc(100% - 40px);
+    text-align: center;
+    word-wrap: break-word;
+}
