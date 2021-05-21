@@ -1,0 +1,18 @@
+@import '../../style/variables.scss';
+@import '../../style/extends.scss';
+
+.filterDiv {
+    margin-top: 2rem;
+}
+
+.filterP {
+    @extend %sidebarText;
+}
+
+.icon {
+    @extend %sidebarIcons;
+}
+
+.eachCheckboxDiv {
+    margin-left: .5rem;
+}

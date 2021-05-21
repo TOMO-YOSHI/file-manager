@@ -11,37 +11,3 @@
 .filterOrderDiv {
     padding: 0 1rem;
 }
-
-.filterDiv {
-    margin-top: 2rem;
-}
-
-.filterOrderP {
-    margin-bottom: .5rem;
-    padding-bottom: .25rem;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid $primary-color;
-}
-
-.icon {
-    margin-right: .5rem;
-}
-
-.eachCheckboxDiv, .eachRadioButtonDiv {
-    margin-left: .5rem;
-}
-
-// .dateRadioButton {};
-
-// .dateRadioButton:checked .eachRadioButtonDiv {
-//    display: none;
-// }
-
-.eachRadioButtonDiv {
-    margin-bottom: .5rem;
-}
-
-.orderDiv {
-    margin-top: 2rem;
-}

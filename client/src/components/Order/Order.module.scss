@@ -1,0 +1,19 @@
+@import '../../style/variables.scss';
+@import '../../style/extends.scss';
+
+.orderDiv {
+    margin-top: 2rem;
+}
+
+.orderP {
+    @extend %sidebarText;
+}
+
+.icon {
+    @extend %sidebarIcons;
+}
+
+.eachRadioButtonDiv {
+    margin-left: .5rem;
+    font-size: 14px;
+}
