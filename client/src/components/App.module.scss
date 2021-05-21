@@ -1,10 +1,15 @@
 @import '../style/variables.scss';
 
-.main {
+.body {
     display: grid;
-    grid-template-columns: 270px 1fr 270px;
+    grid-template-columns: 200px 1fr 192px;
     grid-template-rows: 59.75px 1fr;
     font-family: $secondary-font;
     color: $primary-color;
     height: 100vh;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
 }

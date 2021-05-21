@@ -7,7 +7,7 @@ import styles from './App.module.scss';
 
 const App: React.FC = () => {
     return (
-        <div className={styles.main}>
+        <div className={styles.body}>
             <Headr />
             <ConfigSidebar />
             <TileList />

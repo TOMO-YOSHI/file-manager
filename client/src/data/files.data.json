@@ -1,32 +1,101 @@
 [
     {
+        "file_id": 1,
         "user_id": 1,
         "file_name": "panda.jpg",
         "upload_date": "2021_04_01",
         "last_edit_date": "2021_04_015",
         "memo_text": "This is a picture of panda.",
         "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
-        "image_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/panda.jpg",
         "file_type": "jpg"
     },
     {
+        "file_id": 2,
+        "user_id": 1,
+        "file_name": "panda.jpg",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/panda.jpg",
+        "file_type": "jpg"
+    },
+    {
+        "file_id": 3,
         "user_id": 2,
         "file_name": "panda.jpg",
         "upload_date": "2021_04_01",
         "last_edit_date": "2021_04_015",
         "memo_text": "This is a picture of panda.",
         "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
-        "image_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/panda.jpg",
         "file_type": "jpg"
     },
     {
-        "user_id": 3,
+        "file_id": 4,
+        "user_id": 2,
+        "file_name": "portfolio_social_media_image.png",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/portfolio_social_media_image.png",
+        "file_type": "png"
+    },
+    {
+        "file_id": 5,
+        "user_id": 1,
         "file_name": "panda.jpg",
         "upload_date": "2021_04_01",
         "last_edit_date": "2021_04_015",
         "memo_text": "This is a picture of panda.",
         "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
-        "image_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/panda.jpg",
         "file_type": "jpg"
+    },
+    {
+        "file_id": 6,
+        "user_id": 2,
+        "file_name": "portfolio_social_media_image.png",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/portfolio_social_media_image.png",
+        "file_type": "png"
+    },
+    {
+        "file_id": 7,
+        "user_id": 2,
+        "file_name": "portfolio_social_media_image.png",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/portfolio_social_media_image.png",
+        "file_type": "png"
+    },
+    {
+        "file_id": 8,
+        "user_id": 1,
+        "file_name": "panda.jpg",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/panda.jpg",
+        "file_type": "jpg"
+    },
+    {
+        "file_id": 9,
+        "user_id": 2,
+        "file_name": "portfolio_social_media_image.png",
+        "upload_date": "2021_04_01",
+        "last_edit_date": "2021_04_015",
+        "memo_text": "This is a picture of panda.",
+        "file_url": "https://file-manager-webapp.s3-us-west-2.amazonaws.com/panda.jpg",
+        "image_url": "files/portfolio_social_media_image.png",
+        "file_type": "png"
     }
 ]
