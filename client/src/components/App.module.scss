@@ -1,0 +1,10 @@
+@import '../style/variables.scss';
+
+.main {
+    display: grid;
+    grid-template-columns: 270px 1fr 270px;
+    grid-template-rows: 59.75px 1fr;
+    font-family: $secondary-font;
+    color: $primary-color;
+    height: 100vh;
+}
