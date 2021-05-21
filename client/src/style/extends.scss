@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+%sidebarIcons {
+    margin-right: .5rem;
+}
+
+%sidebarText {
+    margin-bottom: .5rem;
+    padding-bottom: .25rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $primary-color;
+}
