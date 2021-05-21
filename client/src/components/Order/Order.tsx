@@ -43,9 +43,9 @@ const Order: React.FC = () => {
         }
     }
 
-    useEffect(()=>{
-        console.log(orderOptions)
-    }, [orderOptions]);
+    // useEffect(()=>{
+    //     console.log(orderOptions)
+    // }, [orderOptions]);
 
     // const checkRef = useCallback(node => {
     //     if (node !== null) {

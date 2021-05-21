@@ -4,9 +4,12 @@ import { FaPlus } from "react-icons/fa";
 
 const UploadButton: React.FC = () => {
     return (
-        <div className={styles.uploadButtonDiv}>
-            <FaPlus className={styles.icon} />New
-        </div>
+        <label>
+            <div className={styles.uploadButtonDiv}>
+                <FaPlus className={styles.icon} />New
+            </div>
+            <input className={styles.inputFile} type='file' />
+        </label>
     );
 };
 
