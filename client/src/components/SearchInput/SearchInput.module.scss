@@ -17,10 +17,11 @@
 
 .searchInput {
     margin-left: 1rem;
-    padding: .2rem;
+    padding: .5rem;
     width: 100%;
     border: none;
     background-color: $theme-lightgrey;
+    font-size: 16px;
 
     &::placeholder {
         opacity: 1;

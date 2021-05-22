@@ -1,24 +1,13 @@
 @import '../../style/variables.scss';
 @import '../../style/extends.scss';
 
-%cardBasic {
+.cardItemDiv {
+    @extend %cardShadow;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: .75rem;
     cursor: pointer;
-}
-
-.cardItemDiv {
-    @extend %cardShadow;
-    @extend %cardBasic;
-}
-
-.cardItemDivActive {
-    @extend %cardShadow;
-    @extend %cardBasic;
-    background-color: $theme-lightgrey;
-    @extend %activeShadow;
 }
 
 .cardItemDiv:hover {
@@ -27,14 +16,10 @@
 
 .fileImageDiv {
     flex-grow: 10;
-    // position: relative;
 }
 
 .fileImage {
     display: block;
-    // position: absolute;
-    // top: 50%;
-    // transform: translate(0, -50%);
     height: 100% !important;
     width: 100%;
     object-fit: contain;

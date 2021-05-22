@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfigSidebar from './ConfigSidebar/ConfigSidebar';
 import Headr from './Header/Header';
-import ListSidebar from './ListSidebar/ListSidebar';
+import RightSidebar from './RightSidebar/RightSidebar';
 import TileList from './TileList/TileList';
 import styles from './App.module.scss';
 
@@ -11,7 +11,7 @@ const App: React.FC = () => {
             <Headr />
             <ConfigSidebar />
             <TileList />
-            <ListSidebar />
+            <RightSidebar />
         </div>
     )
 }

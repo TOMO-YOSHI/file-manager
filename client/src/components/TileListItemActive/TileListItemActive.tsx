@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import styles from './TileListItem.module.scss';
+import React from 'react';
+import styles from './TileListItemActive.module.scss';
 import { File } from '../../redux/files/files.actions';
+
 
 interface Props {
     file: File;
 }
 
-const TileListItem: React.FC<Props>= ({file}) => {
-    const [active, setActive] = useState(false); // This should be managed in Redux.
-
-    const onClickHandler = () => {
-        setActive(!active);
-    }
-
+const TileListItemActive: React.FC<Props>= ({file}) => {
     return (
-        <div className={active ? styles.cardItemDivActive : styles.cardItemDiv} onClick={onClickHandler}>
+        <div className={styles.cardItemDiv}>
             <div className={styles.fileImageDiv}>
                 <img className={styles.fileImage} src={file.image_url} />
             </div>
@@ -26,4 +21,4 @@ const TileListItem: React.FC<Props>= ({file}) => {
     );
 };
 
-export default TileListItem;
+export default TileListItemActive;

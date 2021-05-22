@@ -1,7 +1,8 @@
 @import '../../style/variables.scss';
 
 .header {
-    padding: 1rem;
+    // padding: 1rem;
+    padding: 0 1rem;
     /* column-spa does not work correctoly.
     Thus grid-column should be used instead */
     /* column-span: 3; */
