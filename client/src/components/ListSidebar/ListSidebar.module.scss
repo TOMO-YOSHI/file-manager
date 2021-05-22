@@ -1,0 +1,34 @@
+@import '../../style/variables.scss';
+
+.listSidebarDiv {
+    // padding: .5rem;
+    margin-top: 1.25rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: scroll;
+}
+
+.listSidebarUl {
+    padding: 0;
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.listSidebarListitem {
+    word-wrap: break-word;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.listSidebarListitem:hover {
+    color: $secondary-color;
+}
+
+.fileName {
+    margin: 0;
+}
+
+.fileLastEdit {
+    margin: 0;
+    margin-top: .25rem;
+}
