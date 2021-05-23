@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { StoreState } from '../../redux/root-reducer';
 import styles from './TileListItem.module.scss';
-import { File } from '../../redux/files/files.actions';
+import { File, selectFile } from '../../redux/files';
 
 interface Props {
     file: File;
 }
 
 const TileListItem: React.FC<Props>= ({file}) => {
-    const [active, setActive] = useState(false); // This should be managed in Redux.
+    const dispatch = useDispatch();
+    const selectedFileId = useSelector((state: StoreState) => state.filesState.selectedFileId);
 
     const onClickHandler = () => {
-        setActive(!active);
+        dispatch(selectFile(file.file_id));
     }
 
     return (
-        <div className={active ? styles.cardItemDivActive : styles.cardItemDiv} onClick={onClickHandler}>
+        <div className={selectedFileId === file.file_id ? styles.cardItemDivActive : styles.cardItemDiv} onClick={onClickHandler}>
             <div className={styles.fileImageDiv}>
                 <img className={styles.fileImage} src={file.image_url} />
             </div>

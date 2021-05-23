@@ -1,3 +1,10 @@
 import { combineReducers } from 'redux';
+import { filesReducer, FilesState } from './files'
 
-export const reducers = () => {};
+export interface StoreState {
+    filesState: FilesState
+}
+
+export const rootReducer = combineReducers<StoreState>({
+    filesState: filesReducer
+});
