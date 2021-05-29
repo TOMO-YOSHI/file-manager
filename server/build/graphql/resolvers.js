@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,7 +48,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
+var apollo_server_express_1 = require("apollo-server-express");
+var getFileById = function (id, db) { return __awaiter(void 0, void 0, void 0, function () {
+    var files;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, db.then(function (pool) {
+                    return pool.query("\n            SELECT * FROM files WHERE file_id = ?\n        ", [id]).then(function (result) { return result; });
+                })];
+            case 1:
+                files = _a.sent();
+                return [2 /*return*/, files.length ? files[0] : null];
+        }
+    });
+}); };
 exports.resolvers = {
+    // export const resolvers: Resolvers<ApolloContext> = {
     Query: {
         files: function (parent, args, context) {
             return __awaiter(this, void 0, void 0, function () {
@@ -61,6 +87,103 @@ exports.resolvers = {
                             files = _a.sent();
                             // console.log(files);
                             return [2 /*return*/, files];
+                    }
+                });
+            });
+        },
+    },
+    Mutation: {
+        createFile: function (parent, args, context) {
+            return __awaiter(this, void 0, void 0, function () {
+                var input, columns, sqlParams, file, createdFile, i, error_1;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            input = args.input;
+                            columns = [
+                                'file_name',
+                                'upload_date',
+                                'file_url',
+                                'file_type',
+                                'file_size_kb'
+                            ];
+                            sqlParams = [
+                                input.file_name,
+                                input.upload_date,
+                                input.file_url,
+                                input.file_type,
+                                input.file_size_kb
+                            ];
+                            if (input.user_id) {
+                                columns.push('user_id');
+                                sqlParams.push(input.user_id);
+                            }
+                            ;
+                            if (input.memo_text) {
+                                columns.push('memo_text');
+                                sqlParams.push(input.memo_text);
+                            }
+                            ;
+                            if (input.image_url) {
+                                columns.push('image_url');
+                                sqlParams.push(input.image_url);
+                            }
+                            ;
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, context.mysql.then(function (pool) {
+                                    var placeholder = [];
+                                    for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
+                                        var column = columns_1[_i];
+                                        placeholder.push('?');
+                                    }
+                                    var query = "\n                        INSERT INTO \n                            files(" + columns.join(',') + ")\n                            values(" + placeholder.join(',') + ")";
+                                    return pool.query(query, sqlParams).then(function (result) { return result; }).catch(function (error) { throw error; });
+                                })];
+                        case 2:
+                            file = _a.sent();
+                            createdFile = {};
+                            for (i = 0; i < columns.length; i++) {
+                                createdFile[columns[i]] = sqlParams[i];
+                            }
+                            return [2 /*return*/, __assign(__assign({}, createdFile), { file_id: file.insertId })];
+                        case 3:
+                            error_1 = _a.sent();
+                            console.log(error_1);
+                            return [3 /*break*/, 4];
+                        case 4: return [2 /*return*/];
+                    }
+                });
+            });
+        },
+        deleteFile: function (parent, args, context) {
+            return __awaiter(this, void 0, void 0, function () {
+                var file_id, file, error_2;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            file_id = args.file_id;
+                            file = getFileById(args.file_id, context.mysql);
+                            if (!file) {
+                                throw new apollo_server_express_1.UserInputError('Could not find your file.');
+                            }
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, context.mysql.then(function (pool) {
+                                    return pool.query("DELETE FROM files WHERE file_id = ?", [file_id]).catch(function (error) {
+                                        throw error;
+                                    });
+                                })];
+                        case 2:
+                            _a.sent();
+                            return [2 /*return*/, file];
+                        case 3:
+                            error_2 = _a.sent();
+                            console.log(error_2);
+                            return [3 /*break*/, 4];
+                        case 4: return [2 /*return*/];
                     }
                 });
             });
