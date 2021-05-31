@@ -1,5 +1,5 @@
 import { ActionTypes } from './file.types';
-import data from '../../data/files.data.json'; // DEMO DATA
+// import data from '../../data/files.data.json'; // DEMO DATA
 
 export interface File {
     file_id: number;
@@ -24,12 +24,22 @@ export interface SelectFileAction {
     payload: number;
 }
 
-export const fetchFiles = () => ({
+export interface DeleteFileAction {
+    type: ActionTypes.deleteFile;
+    payload: number;
+}
+
+export const fetchFiles = (payload: File[]) => ({
     type: ActionTypes.fetchFiles,
-    payload: data
+    payload: payload
 });
 
 export const selectFile = (payload: number) => ({
     type: ActionTypes.selectFile,
     payload: payload
 });
+
+export const deleteFile = (payload: number) => ({
+    type: ActionTypes.deleteFile,
+    payload: payload
+})

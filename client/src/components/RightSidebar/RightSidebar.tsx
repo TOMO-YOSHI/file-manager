@@ -6,8 +6,12 @@ import data from '../../data/files.data.json';
 import { File } from '../../redux/files/files.actions';
 import { FaEdit, FaFileDownload, FaTrashAlt, FaExternalLinkAlt } from 'react-icons/fa';
 import FileInfo from '../FileInfo/FileInfo';
+import { useMutation } from '@apollo/client';
+import { DELETE_FILE } from '../../graphql/request';
+import { deleteFile } from '../../redux/files/files.actions';
 
 const RightSidebar: React.FC = () => {
+    const dispatch = useDispatch();
     const [file, setFile] = useState<File | null>(null);
     const filesState = useSelector((state: StoreState) => state.filesState);
 
@@ -22,6 +26,18 @@ const RightSidebar: React.FC = () => {
         }
     }, [filesState.selectedFileId]);
 
+    const [deleteFileGql] = useMutation(DELETE_FILE);
+
+    // console.log(file?.file_id)
+
+    const deleteFileHandler = () => {
+        const confirm = window.confirm('Do you really want to delete this file?');
+        if (file && confirm) {
+            deleteFileGql({ variables: { input: file.file_id } });
+            dispatch(deleteFile(file.file_id))
+        }
+    }
+
     return (
         <div className={styles.fileInfoDiv}>
             <h2 className={styles.fileInfoH2}>File Info</h2>
@@ -32,7 +48,10 @@ const RightSidebar: React.FC = () => {
                             <FaExternalLinkAlt className={styles.icon} />
                             {/* <FaEdit className={styles.icon} /> */}
                             <FaFileDownload className={styles.icon} />
-                            <FaTrashAlt className={styles.icon} />
+                            <FaTrashAlt
+                                className={styles.icon}
+                                onClick={deleteFileHandler}
+                            />
                         </div>
                         <FileInfo file={file} />
                     </>
