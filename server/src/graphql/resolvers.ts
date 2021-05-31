@@ -122,6 +122,7 @@ export const resolvers: IResolvers<any, ApolloContext> = {
             }
         },
         async deleteFile(parent, args, context) {
+            console.log(1)
             const file_id = args.file_id;
 
             const file = getFileById(args.file_id, context.mysql);

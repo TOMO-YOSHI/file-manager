@@ -24,3 +24,16 @@
         grid-template-columns: repeat(4, minmax(200px, 1fr));
     }
 }
+
+%centered {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.notFountDiv {
+    @extend %centered
+}
+
+.loadingDiv {
+    @extend %centered
+}

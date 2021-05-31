@@ -1,0 +1,25 @@
+@import '../../style/extends.scss';
+@import '../../style/variables.scss';
+
+.dropzone {
+    @extend %center;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+
+    border-radius: 5px;
+    border: 2px dotted $secondary-color;
+    background-color: $theme-lightgrey;
+    opacity: .5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.uploadInstruction {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}

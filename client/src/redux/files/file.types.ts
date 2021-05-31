@@ -1,10 +1,10 @@
-import { FetchFilesAction, SelectFileAction } from './files.actions';
+import { FetchFilesAction, SelectFileAction, DeleteFileAction } from './files.actions';
 
 export enum ActionTypes {
     fetchFiles,
     deleteFile,
     editFile,
-    selectFile
+    selectFile,
 }
 
-export type Action = FetchFilesAction | SelectFileAction;
+export type Action = FetchFilesAction | SelectFileAction | DeleteFileAction;

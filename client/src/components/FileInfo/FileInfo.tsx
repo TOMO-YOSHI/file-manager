@@ -18,8 +18,12 @@ const FileInfo: React.FC<Props> = ({file}) => {
             <p className={styles.fileName}><span className={styles.tag}>Name:</span> {file.file_name}</p>
             <p><span className={styles.tag}>Type:</span> {file.file_type}</p>
             <p><span className={styles.tag}>Size:</span> {file.file_size_kb} KB</p>
-            <p><span className={styles.tag}>Upload:</span> {file.upload_date}</p>
-            <p><span className={styles.tag}>Editted:</span> {file.last_edit_date}</p>
+            <p><span className={styles.tag}>Upload:</span> {new Date(parseInt(file.upload_date)).toLocaleDateString()}</p>
+            <p><span className={styles.tag}>Editted:</span> {
+                file.last_edit_date ?
+                new Date(parseInt(file.last_edit_date)).toLocaleDateString()
+                : '-'
+            }</p>
             <p><span className={styles.tag}>Memo:</span> </p>
             <p>{file.memo_text}</p>
         </>

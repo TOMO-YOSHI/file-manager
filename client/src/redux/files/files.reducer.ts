@@ -2,6 +2,7 @@ import { File } from './files.actions';
 import { ActionTypes, Action } from './file.types';
 import data from '../../data/files.data.json'; // DEMO DATA
 import { store } from '../store';
+import Filter from '../../components/Filter/Filter';
 
 export interface FilesState {
     files: File[];
@@ -9,8 +10,8 @@ export interface FilesState {
 }
 
 const initialState = {
-    // files: [],
-    files: data,
+    files: [],
+    // files: data,
     selectedFileId: null,
 }
 
@@ -30,6 +31,12 @@ export const filesReducer = (state: FilesState = initialState, action: Action) =
                 ...state,
                 selectedFileId: selectedFileId
             };
+        case ActionTypes.deleteFile:
+            return {
+                ...state,
+                selectedFileId: null,
+                files: state.files.filter(file => file.file_id !== action.payload)
+            }
         default:
             return state;
     }
