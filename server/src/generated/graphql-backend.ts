@@ -25,7 +25,7 @@ export type CreateFileInput = {
   user_id?: Maybe<Scalars['Int']>;
   file_name: Scalars['String'];
   upload_date: Scalars['String'];
-  last_edit_date: Scalars['String'];
+  last_edit_date?: Maybe<Scalars['String']>;
   memo_text?: Maybe<Scalars['String']>;
   file_url: Scalars['String'];
   image_url?: Maybe<Scalars['String']>;

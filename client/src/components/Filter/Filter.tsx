@@ -9,7 +9,7 @@ import { FaFilter } from 'react-icons/fa';
 interface FilterOptions {
     image: boolean;
     video: boolean;
-    document: boolean;
+    audio: boolean;
     others: boolean;
     [key: string]: boolean;
 };
@@ -17,14 +17,14 @@ interface FilterOptions {
 const filterOptionsInitial = {
     image: true,
     video: true,
-    document: true,
+    audio: true,
     others: true,
 };
 
 const filterOptionsClear = {
     image: false,
     video: false,
-    document: false,
+    audio: false,
     others: false,
 };
 
@@ -98,13 +98,13 @@ const Filter: React.FC = () => {
                 <label>
                     <input 
                         type="checkbox" 
-                        id="document" 
+                        id="audio" 
                         name="filter" 
-                        value="document" 
-                        checked={filterOptions.document}
+                        value="audio" 
+                        checked={filterOptions.audio}
                         onChange={checkboxChangeHandler}
                     />
-                    &nbsp;Document<br />
+                    &nbsp;Audio<br />
                     {/* &nbsp;&nbsp;(.docx .doc .pdf .pages) */}
                 </label>
                 <label>

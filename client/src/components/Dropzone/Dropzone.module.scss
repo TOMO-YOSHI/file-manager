@@ -8,7 +8,6 @@
 
     border-radius: 5px;
     border: 2px dotted $secondary-color;
-    background-color: $theme-lightgrey;
     opacity: .5;
 
     display: flex;
@@ -16,6 +15,10 @@
     justify-content: center;
 
     cursor: pointer;
+}
+
+.dropzone:hover {
+    background-color: $theme-lightgrey;
 }
 
 .uploadInstruction {
