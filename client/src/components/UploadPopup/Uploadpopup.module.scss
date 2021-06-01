@@ -47,3 +47,20 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.uploadingDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.uploadCompleted {
+    color: red;
+}
+
+.close {
+    color: $primary-color;
+    cursor: pointer;
+}

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Uploadpopup.module.scss';
-
+import { useMutation } from '@apollo/client';
+import { CREATE_FILE } from '../../graphql/request';
 import Dropzone from '../Dropzone/Dropzone';
+import { uploadHandler } from '../../services/s3Handler';
 
 interface Props {
     onClick: () => void;
@@ -9,6 +11,15 @@ interface Props {
 
 const Uploadpopup: React.FC<Props> = ({ onClick }) => {
     const [files, setFiles] = useState<any[]>([]);
+    const [uploading, setUploading] = useState<boolean>(false);
+    const [uploadingProgress, setUploadingProgress] = useState<number>(0);
+    const [uploadedFiles, setUploadedFiles] = useState<number>(0);
+    const [createFile] = useMutation(CREATE_FILE, {
+        onError: (err) => {
+            // setError(err);
+            console.log(err)
+        }
+    });
 
     const preventClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -23,16 +34,90 @@ const Uploadpopup: React.FC<Props> = ({ onClick }) => {
     const removeFiles = (): void => {
         setFiles([]);
     }
+
+    const fileUploadHandler = async () => {
+        setUploading(true);
+
+        const uploadTracker = async (fileName: string, percent: number) => {
+            setUploadingProgress(Math.floor(percent));
+            if (percent === 100) {
+                // setFiles([]);
+                // setUploading(false);
+
+                setUploadingProgress(0);
+                setUploadedFiles(prev => prev + 1);
+            }
+        }
+
+        for(let file of files) {
+            const file_url = await uploadHandler(file, uploadTracker);
+
+            // Upload record to GraphQL
+            const date: any[] = new Date(new Date().getTime()).toLocaleDateString().split('/');
+            date.unshift(date.pop());
+            const upload_date = date.join('-');
+            const file_name = file.name.slice(0, file.name.indexOf('.'));
+            const file_type = file.type;
+            const file_size_kb = Math.floor(file.size / 1000);
+
+            createFile({
+                variables: {
+                    input: {
+                        file_name,
+                        upload_date,
+                        file_url,
+                        image_url: file_url,
+                        file_type,
+                        file_size_kb
+                    }
+                }
+            });
+
+        }
+    }
+
+    // useEffect(()=>{
+    //     if (files.length === uploadedFiles) {
+    //         setFiles([]);
+    //         setUploading(false);
+    //         setUploadedFiles(0)
+    //     }
+    // }, [uploadedFiles])
     
     return (
         <div
             className={styles.uploadBackgroundDiv}
-            onClick={onClick}>
+            onClick={uploading && uploadedFiles !== files.length ? ()=>{} : onClick}>
             <div
                 className={styles.uploadPopupDiv}
                 onClick={preventClose}>
                     {
-                        files.length > 0 ?
+                        uploading ?
+                        // true ?
+                        <div className={styles.uploadingDiv}>
+                            {
+                                uploadedFiles === files.length ?
+                                <>
+                                    <p className={styles.uploadCompleted}>Upload Completed!</p>
+                                    <p className={styles.close} onClick={onClick}>close</p>
+                                </>
+                                :
+                                <>
+                                    <p>Uploading...</p>
+                                    <p>{uploadedFiles} / {files.length} file(s) uploaded</p>
+                                    <div style={{ backgroundColor: '#ccc', width: "80%", height: "2rem", textAlign: "center", margin: "0 auto" }}>
+                                        <div style={
+                                            {
+                                                backgroundColor: 'red',
+                                                height: "2rem",
+                                                width: uploadingProgress / 100 * 100 + '%'
+                                            }
+                                        }></div>
+                                    </div>
+                                </>
+                            }
+                        </div>
+                        : files.length > 0 ?
                         <div className={styles.uploadFilesListDiv}>
                             <ul className={styles.filesUl}>
                                 {
@@ -49,7 +134,7 @@ const Uploadpopup: React.FC<Props> = ({ onClick }) => {
                                 }
                             </ul>
                             <div className={styles.buttonsDiv}>
-                                <button>Upload File(s)</button>
+                                <button onClick={fileUploadHandler}>Upload File(s)</button>
                                 <p
                                     className={styles.selectAgainP}
                                     onClick={removeFiles}>

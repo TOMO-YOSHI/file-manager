@@ -32,6 +32,14 @@ export const typeDefs = gql`
 
     type Mutation {
         createFile(input: CreateFileInput!): File
+        # createFile(
+        #     file_name: String
+        #     upload_date: String
+        #     file_url: String
+        #     image_url: String
+        #     file_type: String
+        #     file_size_kb: Int
+        # ): File
         deleteFile(file_id: Int!): File
     }
 `;
