@@ -21,6 +21,13 @@ const TileList: React.FC = () => {
         }
     }, [data])
 
+    const filterOption = ['image', 'video', 'audio', 'others']
+
+    useEffect(()=>{
+        const filteredFiles = filesState.files.filter(file => filterOption.includes(file.file_type.slice(0, file.file_type.indexOf('/'))));
+        console.log(filteredFiles);
+    }, [filesState])
+
     return (
         <div className={styles.tileListDiv}>
             {

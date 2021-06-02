@@ -3,7 +3,9 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1.25rem;
+    // grid-column-gap: 1.25rem;
     overflow-y: scroll;
+    // margin-bottom: 2rem;
 
     // Small devices (landscape phones, 576px and up)
     // @media screen and (min-width: 576px) { ... }

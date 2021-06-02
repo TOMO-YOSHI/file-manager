@@ -6,7 +6,7 @@ import Order from '../Order/Order';
 import UploadPopup from '../UploadPopup/Uploadpopup';
 
 const ConfigSidebar: React.FC = () => {
-    const [upload, setUpload] = useState(true)
+    const [upload, setUpload] = useState(false)
 
     return (
         <div className={styles.configSidebarDiv}>

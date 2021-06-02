@@ -71,25 +71,25 @@ export const uploadHandler = async (file: any, progressCallback: (fileName: stri
     }
 }
 
-// export const s3DeleteHandler = async (filePath, token) => {
+export const s3DeleteHandler = async (filePath: string) => {
 
-//     const result = await fetch(`${url}/s3storage`,
-//         {
-//             method: "DELETE",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({ filePath }),
-//         })
-//         .then(response => {
-//             return response.body;
-//             // return response.json();
-//         })
-//         .catch(error => {
-//             alert(JSON.stringify(error));
-//         })
+    const result = await fetch(`${api}/s3storage`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ filePath }),
+        })
+        .then(response => {
+            return response.body;
+            // return response.json();
+        })
+        .catch(error => {
+            alert(JSON.stringify(error));
+        })
 
-//     // console.log(result);
+    // console.log(result);
 
-//     return result;
-// }
+    return result;
+}
