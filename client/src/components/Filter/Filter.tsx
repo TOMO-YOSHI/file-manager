@@ -6,7 +6,7 @@ import { FaFilter } from 'react-icons/fa';
 //     boolean
 // }
 
-interface FilterOptions {
+interface FilterOptionsLocal {
     image: boolean;
     video: boolean;
     audio: boolean;
@@ -14,14 +14,14 @@ interface FilterOptions {
     [key: string]: boolean;
 };
 
-const filterOptionsInitial = {
+const filterOptionsLocalInitial = {
     image: true,
     video: true,
     audio: true,
     others: true,
 };
 
-const filterOptionsClear = {
+const filterOptionsLocalClear = {
     image: false,
     video: false,
     audio: false,
@@ -30,11 +30,11 @@ const filterOptionsClear = {
 
 const Filter: React.FC = () => {
     const [isAll, setIsAll] = useState<boolean>(false);
-    const [filterOptions, setFilterOptions] = useState<FilterOptions>(filterOptionsInitial);
+    const [filterOptionsLocal, setFilterOptionsLocal] = useState<FilterOptionsLocal>(filterOptionsLocalInitial);
 
     const checkboxChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setFilterOptions({
-            ...filterOptions,
+        setFilterOptionsLocal({
+            ...filterOptionsLocal,
             [e.target.value]: e.target.checked
         })
     };
@@ -42,21 +42,21 @@ const Filter: React.FC = () => {
     const allCheckboxChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setIsAll(e.target.checked);
         if (e.target.checked) {
-            setFilterOptions(filterOptionsInitial);
+            setFilterOptionsLocal(filterOptionsLocalInitial);
         } else {
-            setFilterOptions(filterOptionsClear);
+            setFilterOptionsLocal(filterOptionsLocalClear);
         }
     };
 
     useEffect(()=>{
-        for(let key in filterOptions) {
-            if(!filterOptions[key]) {
+        for(let key in filterOptionsLocal) {
+            if(!filterOptionsLocal[key]) {
                 setIsAll(false);
                 return;
             }
         }
         setIsAll(true);
-    }, [filterOptions]);
+    }, [filterOptionsLocal]);
 
     return (
         <div className={styles.filterDiv}>
@@ -79,7 +79,7 @@ const Filter: React.FC = () => {
                         id="image" 
                         name="filter" 
                         value="image" 
-                        checked={filterOptions.image}
+                        checked={filterOptionsLocal.image}
                         onChange={checkboxChangeHandler}
                     />
                     &nbsp;Image
@@ -90,7 +90,7 @@ const Filter: React.FC = () => {
                         id="video" 
                         name="filter" 
                         value="video" 
-                        checked={filterOptions.video}
+                        checked={filterOptionsLocal.video}
                         onChange={checkboxChangeHandler}
                     />
                     &nbsp;Video
@@ -101,7 +101,7 @@ const Filter: React.FC = () => {
                         id="audio" 
                         name="filter" 
                         value="audio" 
-                        checked={filterOptions.audio}
+                        checked={filterOptionsLocal.audio}
                         onChange={checkboxChangeHandler}
                     />
                     &nbsp;Audio<br />
@@ -113,7 +113,7 @@ const Filter: React.FC = () => {
                         id="others"
                         name="filter"
                         value="others"
-                        checked={filterOptions.others}
+                        checked={filterOptionsLocal.others}
                         onChange={checkboxChangeHandler}
                     />
                     &nbsp;Others

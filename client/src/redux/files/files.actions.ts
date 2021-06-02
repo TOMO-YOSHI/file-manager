@@ -29,6 +29,16 @@ export interface DeleteFileAction {
     payload: number;
 }
 
+export interface AddFileAction {
+    type: ActionTypes.addFile;
+    payload: File;
+}
+
+export interface ChangeFilterOption {
+    type: ActionTypes.changeFilterOption;
+    payload: string[];
+}
+
 export const fetchFiles = (payload: File[]) => ({
     type: ActionTypes.fetchFiles,
     payload: payload
@@ -41,5 +51,15 @@ export const selectFile = (payload: number) => ({
 
 export const deleteFile = (payload: number) => ({
     type: ActionTypes.deleteFile,
+    payload: payload
+})
+
+export const addFile = (payload: File) => ({
+    type: ActionTypes.addFile,
+    payload: payload
+})
+
+export const changeFilterOption = (payload: string[]) => ({
+    type: ActionTypes.changeFilterOption,
     payload: payload
 })

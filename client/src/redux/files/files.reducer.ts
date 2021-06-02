@@ -1,18 +1,16 @@
 import { File } from './files.actions';
 import { ActionTypes, Action } from './file.types';
-import data from '../../data/files.data.json'; // DEMO DATA
-import { store } from '../store';
-import Filter from '../../components/Filter/Filter';
 
 export interface FilesState {
     files: File[];
     selectedFileId: number | null;
+    filterOption: string[];
 }
 
 const initialState = {
     files: [],
-    // files: data,
     selectedFileId: null,
+    filterOption: [],
 }
 
 export const filesReducer = (state: FilesState = initialState, action: Action) => {
@@ -36,6 +34,16 @@ export const filesReducer = (state: FilesState = initialState, action: Action) =
                 ...state,
                 selectedFileId: null,
                 files: state.files.filter(file => file.file_id !== action.payload)
+            };
+        case ActionTypes.addFile:
+            return {
+                ...state,
+                files: [...state.files, action.payload]
+            };
+        case ActionTypes.changeFilterOption:
+            return {
+                ...state,
+                filterOption: action.payload
             }
         default:
             return state;
