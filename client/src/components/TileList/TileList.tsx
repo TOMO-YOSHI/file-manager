@@ -12,7 +12,6 @@ import { fetchFiles } from '../../redux/files/files.actions';
 const TileList: React.FC = () => {
     const dispatch = useDispatch();
     const filesState = useSelector((state: StoreState) => state.filesState);
-    // console.log(filesState);
     const { data, loading, error } = useQuery(GET_FILES);
 
     useEffect(()=>{
@@ -21,12 +20,12 @@ const TileList: React.FC = () => {
         }
     }, [data])
 
-    const filterOption = ['image', 'video', 'audio', 'others']
+    // const filterOption = ['image', 'video', 'audio', 'others']
 
-    useEffect(()=>{
-        const filteredFiles = filesState.files.filter(file => filterOption.includes(file.file_type.slice(0, file.file_type.indexOf('/'))));
-        console.log(filteredFiles);
-    }, [filesState])
+    // useEffect(()=>{
+    //     const filteredFiles = filesState.files.filter(file => filesState.filterOption.includes(file.file_type.slice(0, file.file_type.indexOf('/'))));
+    //     console.log(filteredFiles);
+    // }, [filesState])
 
     return (
         <div className={styles.tileListDiv}>
@@ -37,9 +36,15 @@ const TileList: React.FC = () => {
                     </div>
                     : filesState ?
                         filesState.files.map((item: File, index: number) => {
-                            return (
-                                <TileListItem key={item.file_id} file={item} />
-                            )
+
+                            if(filesState.filterOption.includes(item.file_type.slice(0, item.file_type.indexOf('/')))) {
+                                return (
+                                    <TileListItem key={item.file_id} file={item} />
+                                )
+                            } else {
+                                return null;
+                            }
+
                         })
                     :
                     < div className={styles.notFountDiv}>

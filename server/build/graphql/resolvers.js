@@ -62,8 +62,8 @@ var getFileById = function (id, db) { return __awaiter(void 0, void 0, void 0, f
         }
     });
 }); };
+// export const resolvers: IResolvers<any, ApolloContext> = {
 exports.resolvers = {
-    // export const resolvers: Resolvers<ApolloContext> = {
     Query: {
         files: function (parent, args, context) {
             return __awaiter(this, void 0, void 0, function () {
@@ -95,7 +95,8 @@ exports.resolvers = {
     Mutation: {
         createFile: function (parent, args, context) {
             return __awaiter(this, void 0, void 0, function () {
-                var input, columns, sqlParams, file, createdFile, i, error_1;
+                var input, columns, sqlParams, file, createdFile, i;
+                var _this = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -129,37 +130,32 @@ exports.resolvers = {
                                 sqlParams.push(input.image_url);
                             }
                             ;
-                            _a.label = 1;
+                            return [4 /*yield*/, context.mysql.then(function (pool) { return __awaiter(_this, void 0, void 0, function () {
+                                    var placeholder, _i, columns_1, column, query;
+                                    return __generator(this, function (_a) {
+                                        placeholder = [];
+                                        for (_i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
+                                            column = columns_1[_i];
+                                            placeholder.push('?');
+                                        }
+                                        query = "\n                    INSERT INTO \n                        files(" + columns.join(',') + ")\n                        values(" + placeholder.join(',') + ")";
+                                        return [2 /*return*/, pool.query(query, sqlParams).then(function (result) { return result; }).catch(function (error) { throw error; })];
+                                    });
+                                }); })];
                         case 1:
-                            _a.trys.push([1, 3, , 4]);
-                            return [4 /*yield*/, context.mysql.then(function (pool) {
-                                    var placeholder = [];
-                                    for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
-                                        var column = columns_1[_i];
-                                        placeholder.push('?');
-                                    }
-                                    var query = "\n                        INSERT INTO \n                            files(" + columns.join(',') + ")\n                            values(" + placeholder.join(',') + ")";
-                                    return pool.query(query, sqlParams).then(function (result) { return result; }).catch(function (error) { throw error; });
-                                })];
-                        case 2:
                             file = _a.sent();
                             createdFile = {};
                             for (i = 0; i < columns.length; i++) {
                                 createdFile[columns[i]] = sqlParams[i];
                             }
                             return [2 /*return*/, __assign(__assign({}, createdFile), { file_id: file.insertId })];
-                        case 3:
-                            error_1 = _a.sent();
-                            console.log(error_1);
-                            return [3 /*break*/, 4];
-                        case 4: return [2 /*return*/];
                     }
                 });
             });
         },
         deleteFile: function (parent, args, context) {
             return __awaiter(this, void 0, void 0, function () {
-                var file_id, file, error_2;
+                var file_id, file, error_1;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -180,8 +176,8 @@ exports.resolvers = {
                             _a.sent();
                             return [2 /*return*/, file];
                         case 3:
-                            error_2 = _a.sent();
-                            console.log(error_2);
+                            error_1 = _a.sent();
+                            console.log(error_1);
                             return [3 /*break*/, 4];
                         case 4: return [2 /*return*/];
                     }

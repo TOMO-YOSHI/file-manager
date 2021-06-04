@@ -31,3 +31,18 @@
     margin: 0 1rem;
     text-align: center;
 }
+
+.iconImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    min-height: 164px;
+    min-width: 164px;
+}
+
+.icon {
+    font-size: 82px;
+    color: $primary-color;
+    opacity: .9;
+}
