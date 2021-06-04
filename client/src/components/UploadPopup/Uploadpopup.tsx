@@ -6,6 +6,7 @@ import { CREATE_FILE } from '../../graphql/request';
 import Dropzone from '../Dropzone/Dropzone';
 import { uploadHandler } from '../../services/s3Handler';
 import { addFile, File } from '../../redux/files/files.actions';
+import { fileTypeGenerator } from '../../services/fileTypeGenerator';
 
 interface Props {
     onClick: () => void;
@@ -61,7 +62,7 @@ const Uploadpopup: React.FC<Props> = ({ onClick }) => {
             date.unshift(date.pop());
             const upload_date = date.join('-');
             const file_name = file.name.slice(0, file.name.indexOf('.'));
-            const file_type = file.type;
+            const file_type = fileTypeGenerator(file.type);
             const file_size_kb = Math.floor(file.size / 1000);
 
             const addedFile = await createFile({

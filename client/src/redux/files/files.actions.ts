@@ -34,9 +34,11 @@ export interface AddFileAction {
     payload: File;
 }
 
+export type FilterOptions = 'image' | 'video' | 'audio' | 'others'
+
 export interface ChangeFilterOption {
     type: ActionTypes.changeFilterOption;
-    payload: string[];
+    payload: [FilterOptions];
 }
 
 export const fetchFiles = (payload: File[]) => ({

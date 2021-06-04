@@ -36,8 +36,8 @@ const getFileById = async (id: number, db: typeof mysql) => {
     return files.length ? files[0] : null;
 }
 
-export const resolvers: IResolvers<any, ApolloContext> = {
-// export const resolvers: Resolvers<ApolloContext> = {
+// export const resolvers: IResolvers<any, ApolloContext> = {
+export const resolvers: Resolvers<ApolloContext> = {
     Query: {
         async files(parent, args, context) {
             let query = 'SELECT * FROM files';
@@ -89,37 +89,40 @@ export const resolvers: IResolvers<any, ApolloContext> = {
                 sqlParams.push(input.image_url);
             };
 
-            try {
-                const file = await context.mysql.then<OkPacket>((pool) => {
+            // TypeScript Error
+            // Don't use try and catch because the function should end with return.
+            // try {
+            const file = await context.mysql.then<OkPacket>(async(pool) => {
 
-                    const placeholder: '?'[] = [];
-                    for(let column of columns) {
-                        placeholder.push('?');
-                    }
-
-                    const query = `
-                        INSERT INTO 
-                            files(${columns.join(',')})
-                            values(${placeholder.join(',')})`
-                        ;
-
-                    return pool.query(query, sqlParams).then((result)=>result).catch((error) => {throw error});
-                });
-
-                const createdFile = {} as File;
-
-                for(let i = 0; i < columns.length; i++) {
-                    createdFile[columns[i]] = sqlParams[i];
+                const placeholder: '?'[] = [];
+                for(let column of columns) {
+                    placeholder.push('?');
                 }
 
-                return {
-                    ...createdFile,
-                    file_id: file.insertId,
-                }
+                const query = `
+                    INSERT INTO 
+                        files(${columns.join(',')})
+                        values(${placeholder.join(',')})`
+                    ;
 
-            } catch(error) {
-                console.log(error);
+                return pool.query(query, sqlParams).then((result)=>result).catch((error) => {throw error});
+            });
+            // } catch(error) {
+            //     console.log(error);
+            // }
+
+
+            const createdFile = {} as File;
+
+            for(let i = 0; i < columns.length; i++) {
+                createdFile[columns[i]] = sqlParams[i];
             }
+
+            return {
+                ...createdFile,
+                file_id: file.insertId,
+            }
+
         },
         async deleteFile(parent, args, context) {
             // console.log(1)

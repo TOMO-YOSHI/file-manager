@@ -19,13 +19,17 @@ const TileListItem: React.FC<Props>= ({file}) => {
 
     return (
         <div className={selectedFileId === file.file_id ? styles.cardItemDivActive : styles.cardItemDiv} onClick={onClickHandler}>
-            <ImageComponent image_url={file.image_url} />
+            <ImageComponent file={file} />
             <div className={styles.captionDiv}>
                 <p className={styles.fileType}>{
                     // file.file_type.split('').splice(0, file.file_type.indexOf('/')).join('')
-                    file.file_type.split('').slice(file.file_type.indexOf('/') + 1).join('')
+                    file.file_type.split('').slice(0, file.file_type.indexOf('/')).join('')
                 }</p>
-                <p className={styles.caption}>{file.file_name}</p>
+                <p className={styles.caption}>{
+                    file.file_name.length < 12 ?
+                    file.file_name:
+                    file.file_name.slice(0, 12) + '...'
+                }</p>
             </div>
         </div>
     );

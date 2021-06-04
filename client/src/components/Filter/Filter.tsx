@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './Filter.module.scss';
 import { FaFilter } from 'react-icons/fa';
+import { changeFilterOption } from '../../redux/files/files.actions';
 
 // interface IsAll {
 //     boolean
@@ -29,6 +31,7 @@ const filterOptionsLocalClear = {
 };
 
 const Filter: React.FC = () => {
+    const dispatch = useDispatch();
     const [isAll, setIsAll] = useState<boolean>(false);
     const [filterOptionsLocal, setFilterOptionsLocal] = useState<FilterOptionsLocal>(filterOptionsLocalInitial);
 
@@ -49,6 +52,17 @@ const Filter: React.FC = () => {
     };
 
     useEffect(()=>{
+
+        // Change filter options of Redux
+        const filterOptionArray: string[] = [];
+        for(let key in filterOptionsLocal) {
+            if (filterOptionsLocal[key]) {
+                filterOptionArray.push(key)
+            }
+        }
+        dispatch(changeFilterOption(filterOptionArray))
+
+        // Change "All" checkbox
         for(let key in filterOptionsLocal) {
             if(!filterOptionsLocal[key]) {
                 setIsAll(false);

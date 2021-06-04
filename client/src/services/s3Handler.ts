@@ -1,4 +1,5 @@
 import { api } from '../api';
+import { fileTypeGenerator } from './fileTypeGenerator';
 
 export const uploadHandler = async (file: any, progressCallback: (fileName: string, percentComplete: number) => void) => {
     const xhr = new XMLHttpRequest();
@@ -10,7 +11,9 @@ export const uploadHandler = async (file: any, progressCallback: (fileName: stri
     // fileName += '_s3storage_' + new Date().getTime();
     fileName = fileName.replace('.', '_s3storage_' + new Date().getTime() + '.');
     
-    let fileType = file.type;
+    // const fileTypes = ['image', 'video', 'audio'];
+    // let fileType = fileTypes.includes(file.type.slice(0, file.type.indexOf('/'))) ? file.type: 'others' ;
+    let fileType = fileTypeGenerator(file.type);
     // console.log("Preparing the upload");
 
     let returnData;
