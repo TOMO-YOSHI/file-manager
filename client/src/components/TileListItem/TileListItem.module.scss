@@ -27,38 +27,6 @@
   @extend %hoverShadow;
 }
 
-.fileImageDiv {
-    flex-grow: 10;
-    // position: relative;
-}
-
-.fileImage {
-    display: block;
-    // position: absolute;
-    // top: 50%;
-    // transform: translate(0, -50%);
-    height: 100% !important;
-    width: 100%;
-    max-height: 164px;
-    object-fit: contain;
-}
-
-.noImage {
-    min-height: 164px;
-    min-width: 164px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: $theme-white 1px solid;
-    background-color: $theme-lightgrey;
-    color: $theme-white;
-}
-
-.faildText {
-    margin: 0 1rem;
-    text-align: center;
-}
-
 .captionDiv {
     display: flex;
     align-items: center;
