@@ -8,7 +8,7 @@ const connectionConfig = {
     database: process.env.MYSQL_DATABASE,
     password: process.env.MYSQL_PASSWORD,
     // port: process.env.MYSQL_PORT,
-    port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : NaN,
+    // port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : NaN,
     multipleStatements: true
 };
 
