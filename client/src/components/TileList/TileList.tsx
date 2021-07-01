@@ -22,10 +22,59 @@ const TileList: React.FC = () => {
     }, [data])
 
     useEffect(() => {
-        setFiles(filesState.files);
-    }, [filesState.files]);
+        setFiles(
+            sortFiles(
+                filesState.orderRuleOption.orderRule,
+                filesState.orderRuleOption.orderOption,
+                filesState.files
+            )
+        );
+    }, [filesState]);
 
-    console.log(filesState.orderRuleOption)
+    // console.log(filesState.orderRuleOption)
+
+    // console.log(files)
+
+    const sortFiles = (rule: string, option: string, arr: File[]): File[] => {
+        const arrayForSort = [...arr];
+        if(rule === 'date') {
+            switch(option) {
+                case 'new':
+                    return  arrayForSort.sort((a, b) => parseInt(a.upload_date) - parseInt(b.upload_date));
+                case 'old':
+                    return  arrayForSort.sort((a, b) => parseInt(b.upload_date) - parseInt(a.upload_date));
+                default:
+                    return arrayForSort;
+            };
+        };
+        if(rule === 'name') {
+            switch(option) {
+                case 'asc':
+                    return arrayForSort.sort((a: any, b: any) => {
+                        if (a.file_name.toLowerCase() < b.file_name.toLowerCase()) return -1;
+                        if (a.file_name.toLowerCase() > b.file_name.toLowerCase()) return 1;
+                        return 0
+                    });
+                case 'des':
+                    return arrayForSort.sort((a: any, b: any) => {
+                        if (
+                            a.file_name.toLowerCase() >
+                            b.file_name.toLowerCase()
+                        )
+                            return -1;
+                        if (
+                            a.file_name.toLowerCase() <
+                            b.file_name.toLowerCase()
+                        )
+                            return 1;
+                        return 0;
+                    });
+                default:
+                    return arrayForSort;
+            }
+        }
+        return arrayForSort;
+    }
 
     // const filterOption = ['image', 'video', 'audio', 'others']
 

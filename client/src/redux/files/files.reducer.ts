@@ -5,7 +5,10 @@ export interface FilesState {
     files: File[];
     selectedFileId: number | null;
     filterOption: string[];
-    orderRuleOption: {};
+    orderRuleOption: {
+        orderRule: string;
+        orderOption: string;
+    };
 }
 
 const initialState = {
