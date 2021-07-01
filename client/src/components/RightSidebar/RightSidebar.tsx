@@ -28,7 +28,7 @@ const RightSidebar: React.FC = () => {
 
     const [deleteFileGql] = useMutation(DELETE_FILE);
 
-    // console.log(file?.file_id)
+    // console.log(file)
 
     const deleteFileHandler = () => {
         const confirm = window.confirm('Do you really want to delete this file?');
@@ -40,26 +40,74 @@ const RightSidebar: React.FC = () => {
         }
     }
 
+    const fileDownloadHandler = (fileURL : string, fileType: string, fileName: string) => {
+        fetch(fileURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": fileType,
+            },
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+                // Create blob link to download
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute(
+                    "download",
+                    fileName +
+                        "." +
+                        fileType
+                            .slice(fileType.lastIndexOf("/") + 1)
+                );
+
+                // Append to html link element page
+                document.body.appendChild(link);
+
+                // Start download
+                link.click();
+
+                // Clean up and remove the link
+                // link.parentNode.removeChild(link);
+            });
+    };
+
     return (
         <div className={styles.fileInfoDiv}>
             <h2 className={styles.fileInfoH2}>File Info</h2>
-            {
-                file ?
-                    <>
-                        <div className={styles.fileInfoIconsDiv}>
+            {file ? (
+                <>
+                    <div className={styles.fileInfoIconsDiv}>
+                        <a
+                            href={file.file_url}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             <FaExternalLinkAlt className={styles.icon} />
-                            {/* <FaEdit className={styles.icon} /> */}
+                        </a>
+                        {/* <FaEdit className={styles.icon} /> */}
+                        {/* <a
+                            download={true}
+                            href={file.file_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                        >
                             <FaFileDownload className={styles.icon} />
-                            <FaTrashAlt
-                                className={styles.icon}
-                                onClick={deleteFileHandler}
-                            />
-                        </div>
-                        <FileInfo file={file} />
-                    </>
-                    :
-                    <p>No file selected.</p>
-            }
+                        </a> */}
+                        <FaFileDownload className={styles.icon} onClick={()=>{
+                            fileDownloadHandler(file.file_url, file.file_type, file.file_name)
+                        }} />
+                        <FaTrashAlt
+                            className={styles.icon}
+                            onClick={deleteFileHandler}
+                        />
+                    </div>
+                    <FileInfo file={file} />
+                </>
+            ) : (
+                <p>No file selected.</p>
+            )}
         </div>
     );
 };

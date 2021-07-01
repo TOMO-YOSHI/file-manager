@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './TileList.module.scss';
 import TileListItem from '../TileListItem/TileListItem';
@@ -10,6 +10,7 @@ import { File } from '../../redux/files';
 import { fetchFiles } from '../../redux/files/files.actions';
 
 const TileList: React.FC = () => {
+    const [files, setFiles] = useState<File[]|[]>([]);
     const dispatch = useDispatch();
     const filesState = useSelector((state: StoreState) => state.filesState);
     const { data, loading, error } = useQuery(GET_FILES);
@@ -19,6 +20,12 @@ const TileList: React.FC = () => {
             dispatch(fetchFiles(data.files));
         }
     }, [data])
+
+    useEffect(() => {
+        setFiles(filesState.files);
+    }, [filesState.files]);
+
+    console.log(filesState.orderRuleOption)
 
     // const filterOption = ['image', 'video', 'audio', 'others']
 
@@ -35,7 +42,7 @@ const TileList: React.FC = () => {
                         <p>Loading...</p>
                     </div>
                     : filesState ?
-                        filesState.files.map((item: File, index: number) => {
+                        files.map((item: File, index: number) => {
 
                             if(filesState.filterOption.includes(item.file_type.slice(0, item.file_type.indexOf('/')))) {
                                 return (

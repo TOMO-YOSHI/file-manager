@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './Order.module.scss';
 import { FaSortAmountDown } from 'react-icons/fa';
+import { changeOrderRuleOption } from '../../redux/files/';
 
 enum OrderOptions {
     new = 'new',
@@ -9,17 +11,20 @@ enum OrderOptions {
     des = 'des'
 }
 
-interface OrderRule{
+interface OrderRule {
     date: boolean;
     name: boolean;
+    [key: string]: boolean;
 }
 
-interface OrderOption{
+interface OrderOption {
     dateOption: OrderOptions | string;
     nameOption: OrderOptions | string;
+    [key: string]: OrderOptions | string;
 }
 
 const Order: React.FC = () => {
+    const dispatch = useDispatch();
     const [orderRule, setOrderRule] = useState<OrderRule>({date: true, name: false});
     const [orderOptions, setOrderOptions] = useState<OrderOption>(
         {
@@ -42,6 +47,18 @@ const Order: React.FC = () => {
             })
         }
     }
+
+    useEffect(() => {
+        for (const key in orderRule) {
+            if (orderRule[key]) {
+                const payload = {
+                    orderRule: key,
+                    orderOption: orderOptions[key + "Option"],
+                };
+                dispatch(changeOrderRuleOption(payload));
+            }
+        }
+    }, [orderRule, orderOptions, dispatch]);
 
     // useEffect(()=>{
     //     console.log(orderOptions)

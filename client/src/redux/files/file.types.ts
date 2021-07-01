@@ -1,4 +1,4 @@
-import { FetchFilesAction, SelectFileAction, DeleteFileAction, AddFileAction, ChangeFilterOption } from './files.actions';
+import { FetchFilesAction, SelectFileAction, DeleteFileAction, AddFileAction, ChangeFilterOption, ChangeOrderRuleOption } from './files.actions';
 
 export enum ActionTypes {
     fetchFiles,
@@ -7,6 +7,7 @@ export enum ActionTypes {
     selectFile,
     addFile,
     changeFilterOption,
+    changeOrderRuleOption,
 }
 
-export type Action = FetchFilesAction | SelectFileAction | DeleteFileAction | AddFileAction | ChangeFilterOption;
+export type Action = FetchFilesAction | SelectFileAction | DeleteFileAction | AddFileAction | ChangeFilterOption | ChangeOrderRuleOption;
