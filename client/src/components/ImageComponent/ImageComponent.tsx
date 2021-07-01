@@ -21,7 +21,7 @@ const ImageComponent: React.FC<Props> = ({file}) => {
     }
 
     const getType = (type: string | undefined) => {
-        console.log(type)
+        // console.log(type)
         if(type) {
             return type.slice(0, type.indexOf('/'));
         } else {
@@ -37,6 +37,7 @@ const ImageComponent: React.FC<Props> = ({file}) => {
                         className={styles.fileImage}
                         src={imgSrc}
                         onError={onError}
+                        alt=''
                     />
                     : getType(file?.file_type) === 'video' ?
                     <div className={styles.iconImage}>

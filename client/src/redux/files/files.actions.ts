@@ -41,6 +41,18 @@ export interface ChangeFilterOption {
     payload: [FilterOptions];
 }
 
+type orderOptions = 'new' | 'old' | 'asc' | 'des';
+
+interface optionsPayload {
+    orderRule: string;
+    orderOption: string;
+}
+
+export interface ChangeOrderRuleOption {
+    type: ActionTypes.changeOrderRuleOption;
+    payload: optionsPayload
+}
+
 export const fetchFiles = (payload: File[]) => ({
     type: ActionTypes.fetchFiles,
     payload: payload
@@ -63,5 +75,10 @@ export const addFile = (payload: File) => ({
 
 export const changeFilterOption = (payload: string[]) => ({
     type: ActionTypes.changeFilterOption,
+    payload: payload
+})
+
+export const changeOrderRuleOption = (payload: optionsPayload) => ({
+    type: ActionTypes.changeOrderRuleOption,
     payload: payload
 })

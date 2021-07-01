@@ -5,13 +5,15 @@ export interface FilesState {
     files: File[];
     selectedFileId: number | null;
     filterOption: string[];
+    orderRuleOption: {};
 }
 
 const initialState = {
     files: [],
     selectedFileId: null,
     filterOption: [],
-}
+    orderRuleOption: { orderRule: "date", orderOption: 'new' },
+};
 
 export const filesReducer = (state: FilesState = initialState, action: Action) => {
     switch(action.type) {
@@ -45,6 +47,11 @@ export const filesReducer = (state: FilesState = initialState, action: Action) =
                 ...state,
                 filterOption: action.payload
             }
+        case ActionTypes.changeOrderRuleOption:
+            return {
+                ...state,
+                orderRuleOption: action.payload
+            };
         default:
             return state;
     }
