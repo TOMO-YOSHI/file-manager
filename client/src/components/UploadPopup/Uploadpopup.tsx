@@ -58,10 +58,14 @@ const Uploadpopup: React.FC<Props> = ({ onClick }) => {
             const file_url = await uploadHandler(file, uploadTracker);
 
             // Upload record to GraphQL
-            const date: any[] = new Date(new Date().getTime()).toLocaleDateString().split('/');
+            const date: any[] = new Date(new Date().getTime())
+                .toLocaleDateString()
+                .split("/");
             date.unshift(date.pop());
-            const upload_date = date.join('-');
-            const file_name = file.name.slice(0, file.name.indexOf('.'));
+            const upload_date = date.join("-");
+            // const upload_date = new Date().getTime().toString();
+            console.log();
+            const file_name = file.name.slice(0, file.name.indexOf("."));
             const file_type = fileTypeGenerator(file.type);
             const file_size_kb = Math.floor(file.size / 1000);
 
@@ -73,13 +77,16 @@ const Uploadpopup: React.FC<Props> = ({ onClick }) => {
                         file_url,
                         image_url: file_url,
                         file_type,
-                        file_size_kb
-                    }
-                }
+                        file_size_kb,
+                    },
+                },
             });
 
-            setUploadedFiles(prev => [...prev, addedFile.data.createFile])
+            // Set new added file to global state
+            const newFile = addedFile.data.createFile;
+            newFile.upload_date = new Date().getTime().toString();
 
+            setUploadedFiles((prev) => [...prev, newFile]);
         }
     }
 

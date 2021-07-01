@@ -35,7 +35,7 @@ const FileInfo: React.FC<Props> = ({file}) => {
 
             <p><span className={styles.tag}>Upload:</span> {new Date(parseInt(file.upload_date)).toLocaleDateString()}</p>
 
-            <p><span className={styles.tag}>Editted:</span> {
+            {/* <p><span className={styles.tag}>Editted:</span> {
                 file.last_edit_date ?
                 new Date(parseInt(file.last_edit_date)).toLocaleDateString()
                 : '-'
@@ -45,7 +45,7 @@ const FileInfo: React.FC<Props> = ({file}) => {
                 file.memo_text ?
                     <p>{file.memo_text}</p>
                     : 'No memo'
-            }
+            } */}
         </>
     );
 };

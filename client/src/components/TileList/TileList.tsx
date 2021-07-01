@@ -31,10 +31,6 @@ const TileList: React.FC = () => {
         );
     }, [filesState]);
 
-    // console.log(filesState.orderRuleOption)
-
-    // console.log(files)
-
     const sortFiles = (rule: string, option: string, arr: File[]): File[] => {
         const arrayForSort = [...arr];
         if(rule === 'date') {
@@ -90,7 +86,7 @@ const TileList: React.FC = () => {
                     < div className={styles.loadingDiv}>
                         <p>Loading...</p>
                     </div>
-                    : filesState ?
+                    : files.length > 0 ?
                         files.map((item: File, index: number) => {
 
                             if(filesState.filterOption.includes(item.file_type.slice(0, item.file_type.indexOf('/')))) {
@@ -104,7 +100,7 @@ const TileList: React.FC = () => {
                         })
                     :
                     < div className={styles.notFountDiv}>
-                        <p>No data found.</p>
+                        <p>No file found.</p>
                     </div>
             }
         </div>
