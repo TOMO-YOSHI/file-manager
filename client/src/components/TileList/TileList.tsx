@@ -16,10 +16,11 @@ const TileList: React.FC = () => {
     const { data, loading, error } = useQuery(GET_FILES);
 
     useEffect(()=>{
+        console.log(error);
         if(data) {
             dispatch(fetchFiles(data.files));
         }
-    }, [data])
+    }, [data, error, dispatch])
 
     useEffect(() => {
         setFiles(
