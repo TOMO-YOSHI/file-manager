@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     return (
         <div className={HeaderCSS.header}>
             <h1 className={HeaderCSS.siteName}><RiCloudLine />&nbsp;AWS S3 File Manager</h1>
-            <SearchInput />
+            {/* <SearchInput /> */}
         </div>
     );
 };
