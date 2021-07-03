@@ -1,6 +1,5 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
 import { mysql } from './graphql/db';
 import { ApolloServer } from 'apollo-server-express';
 
