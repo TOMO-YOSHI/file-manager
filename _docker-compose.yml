@@ -5,8 +5,7 @@ services:
       build: ./client
       restart: always
       ports:
-        - "3000:3000"
-      env_file: ./client/.env
+        - "80:3000"
       volumes:
         - ./client:/client
         - /client/node_modules
@@ -14,12 +13,6 @@ services:
         - server
       networks:
         - webappnetwork
-      # logging:
-      #   driver: awslogs
-      #   options: 
-      #     awslogs-group: tutorial
-      #     awslogs-region: us-west-2
-          # awslogs-stream-prefix: node_client
     server:
       build: ./server
       restart: always
@@ -35,27 +28,20 @@ services:
       #   - db
       networks:
         - webappnetwork
-      # logging:
-      #   driver: awslogs
-      #   options: 
-      #     awslogs-group: tutorial
-      #     awslogs-region: us-west-2
-          # awslogs-stream-prefix: node_server
     db:
-      build: ./db
+      image: mysql:5.7
       volumes:
         - ./db/mysql/data:/var/lib/mysql
       restart: always
       ports:
         - "3333:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: file_manager
+        MYSQL_USER: user
+        MYSQL_PASSWORD: password
       networks:
         - webappnetwork
-      # logging:
-      #   driver: awslogs
-      #   options: 
-      #     awslogs-group: tutorial
-      #     awslogs-region: us-west-2
-          # awslogs-stream-prefix: mysql
 
 networks:
   webappnetwork:
