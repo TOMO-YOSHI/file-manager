@@ -11,6 +11,6 @@ ENV MYSQL_USER="user"
 ENV MYSQL_PASSWORD="password"
 
 # Copy files
-COPY ./db/mysql/data /var/lib/mysql
+COPY ./mysql/data /var/lib/mysql
 
 EXPOSE 3333
